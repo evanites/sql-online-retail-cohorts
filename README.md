@@ -83,10 +83,3 @@ Rows with missing CustomerID are excluded from cohort analysis.
 Revenue is computed as Quantity * UnitPrice and aggregated per invoice.
 
 
-## 2) Save the file
-Hit **⌘S**.
-
-After that, go to GitHub Desktop and you should be ready to **commit + push**.
-
-If you paste your current README contents, I can also tell you exactly where to fix the missing backticks, but the above replacement is the quickest.
-::contentReference[oaicite:0]{index=0}
