@@ -31,55 +31,58 @@ source .venv/bin/activate
 pip install duckdb pandas openpyxl
 ```
 
-Put the downloaded dataset here:
+1) Put the downloaded dataset here:
 
-data/raw/online_retail.xlsx
+- `data/raw/online_retail.xlsx`
 
-Convert Excel → CSV:
+2) Convert Excel → CSV:
 
+```bash
 python scripts/convert_xlsx_to_csv.py
+```
 
+3) Load CSV into DuckDB:
 
-Load CSV into DuckDB:
-
+```bash
 python scripts/load_duckdb.py
+```
 
+4) Build staging view + export outputs:
 
-Build staging view + export outputs:
-
+```bash
 python scripts/run_sql.py sql/02_staging.sql
 python scripts/export_cohorts.py
 python scripts/export_metrics.py
+```
 
-Outputs
-outputs/cohorts.csv
+## Outputs
+
+### outputs/cohorts.csv
 
 Columns:
 
-cohort_month: month of a customer’s first purchase
+- cohort_month: month of a customer’s first purchase
 
-months_since_first: 0 = cohort month, 1 = next month, etc.
+- months_since_first: 0 = cohort month, 1 = next month, etc.
 
-active_customers: distinct customers who purchased in that cohort/month offset
+- active_customers: distinct customers who purchased in that cohort/month offset
 
-outputs/customer_metrics.csv
+### outputs/customer_metrics.csv
 
 One-row KPI summary:
 
-customers
+- customers
 
-avg_orders_per_customer
+- avg_orders_per_customer
 
-avg_total_revenue_per_customer
+- avg_total_revenue_per_customer
 
-avg_order_value
+- avg_order_value
 
-repeat_customer_rate (share of customers with 2+ orders)
+- repeat_customer_rate (share of customers with 2+ orders)
 
-Notes / Assumptions
+## Notes / Assumptions
 
-Rows with missing CustomerID are excluded from cohort analysis.
+- Rows with missing CustomerID are excluded from cohort analysis.
 
-Revenue is computed as Quantity * UnitPrice and aggregated per invoice.
-
-
+- Revenue is computed as Quantity * UnitPrice and aggregated per invoice.
